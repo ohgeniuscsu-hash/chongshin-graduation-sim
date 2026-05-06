@@ -60,7 +60,8 @@ export default function ChecklistForm({ program, major, admissionYear, onSubmit,
     e.preventDefault()
 
     // Validate numeric fields
-    if (data.registeredSemesters === '' || data.earnedCredits === '' || data.gpa === '') {
+    if (data.registeredSemesters === '' || data.earnedCredits === '' || data.gpa === '' ||
+        (isThesis && data.thesisAdvisoryCount === '')) {
       setFormError('모든 항목을 입력/선택해주세요.')
       return
     }
