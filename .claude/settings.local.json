@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"C:\\\\Users\\\\hptp01\\\\ForClaude\\\\pre_grad\")",
+      "Bash(python -c \"import pdfplumber; pdf = pdfplumber.open\\('C:/Users/hptp01/ForClaude/pre_grad/2026학년도 대학원 가이드북.pdf'\\); print\\(f'총 페이지: {len\\(pdf.pages\\)}'\\); [print\\(f'--- 페이지 {i+1} ---\\\\n{p.extract_text\\(\\)}'\\) for i, p in enumerate\\(pdf.pages[:15]\\)]\")",
+      "Bash(python -c \"import PyPDF2; r = PyPDF2.PdfReader\\('C:/Users/hptp01/ForClaude/pre_grad/2026학년도 대학원 가이드북.pdf'\\); print\\(f'총 페이지: {len\\(r.pages\\)}'\\); [print\\(f'--- p{i+1} ---\\\\n{r.pages[i].extract_text\\(\\)}'\\) for i in range\\(min\\(15, len\\(r.pages\\)\\)\\)]\")",
+      "Bash(python -c \"import pymupdf\")",
+      "Bash(python -c \"import fitz\")",
+      "Bash(python -c \"import pypdf\")",
+      "Bash(pip install *)",
+      "Bash(python *)",
+      "Bash(npx create-vite@latest . --template react)",
+      "Bash(npx create-vite@latest --help)",
+      "Bash(npx create-vite@latest . --template react --overwrite)",
+      "Bash(npm install *)",
+      "Bash(npx tailwindcss *)",
+      "Bash(./node_modules/.bin/tailwindcss init *)"
+    ]
+  }
+}
