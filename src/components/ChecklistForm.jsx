@@ -23,10 +23,10 @@ function YesNoField({ fieldKey, label, detail, value, onChange }) {
 }
 
 export default function ChecklistForm({ program, major, admissionYear, initialFormData, onSubmit, onBack }) {
-  const requiredCredits = getRequiredCredits(major, admissionYear)
   const qualExams = getQualExams(program, major)
   const isDoctor = program.id === 'doctor'
   const thesisOptions = program.thesisOptions || ['논문']
+  const requiredCourses = program.requiredCourses || []
 
   const defaultData = {
     registeredSemesters: '',
@@ -46,10 +46,12 @@ export default function ChecklistForm({ program, major, admissionYear, initialFo
     academicConference: '',
     researchEthicsEducation: null,
     researchEthicsCourse: null,
+    ...requiredCourses.reduce((acc, c) => ({ ...acc, [`requiredCourse_${c.id}`]: null }), {}),
   }
 
   const [data, setData] = useState(initialFormData ? { ...defaultData, ...initialFormData } : defaultData)
 
+  const requiredCredits = getRequiredCredits(major, admissionYear, data.thesisOption)
   const isThesis = data.thesisOption === '논문'
 
   function set(key, value) {
@@ -92,7 +94,8 @@ export default function ChecklistForm({ program, major, admissionYear, initialFo
       (isDoctor && program.requiresProposal && data.thesisProposal === null) ||
       (isDoctor && program.requiresPublication && isThesis && data.thesisPublication === null) ||
       data.researchEthicsEducation === null ||
-      data.researchEthicsCourse === null
+      data.researchEthicsCourse === null ||
+      requiredCourses.some(c => data[`requiredCourse_${c.id}`] === null)
 
     if (missing) {
       setFormError('모든 항목을 입력/선택해주세요.')
@@ -230,6 +233,22 @@ export default function ChecklistForm({ program, major, admissionYear, initialFo
           <YesNoField fieldKey="thesisPublication" label="학술지 논문 게재"
             detail="한국연구재단 등재(후보)지 1편 이상"
             value={data.thesisPublication} onChange={set} />
+        )}
+
+        {requiredCourses.length > 0 && (
+          <>
+            <hr className="border-gray-100" />
+            {requiredCourses.map(course => (
+              <YesNoField
+                key={course.id}
+                fieldKey={`requiredCourse_${course.id}`}
+                label={course.label}
+                detail={course.detail}
+                value={data[`requiredCourse_${course.id}`]}
+                onChange={set}
+              />
+            ))}
+          </>
         )}
 
         <hr className="border-gray-100" />

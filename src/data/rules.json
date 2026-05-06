@@ -163,6 +163,13 @@
           "thesisAdvisoryMin": 5,
           "baseQualExams": ["영어", "전공"],
           "qualExamCounts": { "전공": 2 },
+          "requiredCourses": [
+            {
+              "id": "regional_research",
+              "label": "권역별연구 이수",
+              "detail": "졸업 필수과목 (교양필수 영역) — 외국인 학생은 선택과목으로 대체 가능"
+            }
+          ],
           "majors": [
             {
               "id": "mission_thm",
@@ -272,12 +279,24 @@
           "thesisAdvisoryMin": 5,
           "baseQualExams": ["영어", "전공"],
           "qualExamCounts": { "전공": 2 },
+          "requiredCourses": [
+            {
+              "id": "counseling_practicum_1",
+              "label": "상담실습 I 이수",
+              "detail": "졸업 필수과목"
+            },
+            {
+              "id": "counseling_practicum_2",
+              "label": "상담실습 II 이수",
+              "detail": "졸업 필수과목"
+            }
+          ],
           "majors": [
             {
               "id": "counseling_master",
               "name": "성경적상담학",
               "creditRules": [
-                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 36 }
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 24, "nonThesisCredits": 30 }
               ]
             }
           ]
@@ -302,7 +321,7 @@
               "id": "church_music_master",
               "name": "교회음악학",
               "creditRules": [
-                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 36 }
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 38 }
               ]
             }
           ]
@@ -327,7 +346,7 @@
               "id": "unification_master",
               "name": "기독교통일개발학",
               "creditRules": [
-                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 36 }
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 30 }
               ]
             }
           ]

@@ -1,8 +1,12 @@
-export function getRequiredCredits(major, admissionYear) {
+export function getRequiredCredits(major, admissionYear, thesisOption) {
   const rule = major.creditRules.find(
     r => admissionYear >= r.admissionYearFrom && admissionYear <= r.admissionYearTo
   )
-  return rule ? rule.totalCredits : null
+  if (!rule) return null
+  if (thesisOption && thesisOption !== '논문' && rule.nonThesisCredits != null) {
+    return rule.nonThesisCredits
+  }
+  return rule.totalCredits
 }
 
 export function getQualExams(program, major) {
@@ -12,7 +16,7 @@ export function getQualExams(program, major) {
 }
 
 export function evaluate(input, program, major) {
-  const requiredCredits = getRequiredCredits(major, input.admissionYear)
+  const requiredCredits = getRequiredCredits(major, input.admissionYear, input.thesisOption)
   const qualExams = getQualExams(program, major)
   const isDoctor = program.id === 'doctor'
   const isThesis = input.thesisOption === '논문'
@@ -162,6 +166,15 @@ export function evaluate(input, program, major) {
     met: input.researchEthicsCourse === true,
     detail: '과목 이수 또는 면제',
   })
+
+  for (const course of program.requiredCourses || []) {
+    items.push({
+      id: `requiredCourse_${course.id}`,
+      label: course.label,
+      met: input[`requiredCourse_${course.id}`] === true,
+      detail: course.detail || '',
+    })
+  }
 
   const passed = items.every(item => item.met === true)
   return { passed, items }

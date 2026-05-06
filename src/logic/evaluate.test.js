@@ -178,3 +178,42 @@ describe('evaluate: 논문대체', () => {
     expect(result.items.find(i => i.id === 'thesisAdvisory')).toBeUndefined()
   })
 })
+
+// ── getRequiredCredits — nonThesisCredits ─────────────────
+describe('getRequiredCredits: 논문대체 학점', () => {
+  const counselingMajor = {
+    id: 'counseling_master',
+    creditRules: [{ admissionYearFrom: 2020, admissionYearTo: 9999, totalCredits: 24, nonThesisCredits: 30 }],
+  }
+  it('논문 선택 → 24학점', () => {
+    expect(getRequiredCredits(counselingMajor, 2022, '논문')).toBe(24)
+  })
+  it('논문대체 선택 → 30학점', () => {
+    expect(getRequiredCredits(counselingMajor, 2022, '논문대체')).toBe(30)
+  })
+  it('thesisOption 미전달 → 24학점(기본값)', () => {
+    expect(getRequiredCredits(counselingMajor, 2022)).toBe(24)
+  })
+})
+
+// ── evaluate — requiredCourses ────────────────────────────
+describe('evaluate: 필수과목', () => {
+  const practiceProgram = {
+    ...masterProgram,
+    thesisOptions: ['논문', '논문대체'],
+    requiredCourses: [
+      { id: 'practicum_1', label: '실습 I 이수', detail: '필수' },
+    ],
+  }
+  it('필수과목 이수 완료 → passed=true', () => {
+    const input = { ...passingMasterInput, requiredCourse_practicum_1: true }
+    const result = evaluate(input, practiceProgram, theologyMajor)
+    expect(result.passed).toBe(true)
+  })
+  it('필수과목 미이수 → passed=false', () => {
+    const input = { ...passingMasterInput, requiredCourse_practicum_1: false }
+    const result = evaluate(input, practiceProgram, theologyMajor)
+    expect(result.passed).toBe(false)
+    expect(result.items.find(i => i.id === 'requiredCourse_practicum_1').met).toBe(false)
+  })
+})
