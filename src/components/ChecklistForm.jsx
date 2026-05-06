@@ -54,8 +54,49 @@ export default function ChecklistForm({ program, major, admissionYear, onSubmit,
     setData(d => ({ ...d, [key]: value }))
   }
 
+  const [formError, setFormError] = useState('')
+
   function handleSubmit(e) {
     e.preventDefault()
+
+    // Validate numeric fields
+    if (data.registeredSemesters === '' || data.earnedCredits === '' || data.gpa === '') {
+      setFormError('모든 항목을 입력/선택해주세요.')
+      return
+    }
+
+    // Validate thesisOption when there are multiple choices
+    if (thesisOptions.length > 1 && data.thesisOption === '') {
+      setFormError('모든 항목을 입력/선택해주세요.')
+      return
+    }
+
+    // Validate academicConference (3-button choice, starts as '')
+    if (data.academicConference === '') {
+      setFormError('모든 항목을 입력/선택해주세요.')
+      return
+    }
+
+    // Validate visible YesNo fields
+    const missing =
+      (qualExams.includes('영어') && data.qualExam_english === null) ||
+      (qualExams.includes('전공') && data.qualExam_major === null) ||
+      (qualExams.includes('교직') && data.qualExam_teaching === null) ||
+      (qualExams.includes('전공언어') && data.qualExam_specialLanguage === null) ||
+      (qualExams.includes('제2외국어') && data.qualExam_secondLanguage === null) ||
+      (isThesis && data.thesisPublicDefense === null) ||
+      (isThesis && data.thesisSimilarityOk === null) ||
+      (isDoctor && program.requiresProposal && data.thesisProposal === null) ||
+      (isDoctor && program.requiresPublication && isThesis && data.thesisPublication === null) ||
+      data.researchEthicsEducation === null ||
+      data.researchEthicsCourse === null
+
+    if (missing) {
+      setFormError('모든 항목을 입력/선택해주세요.')
+      return
+    }
+
+    setFormError('')
     onSubmit({
       ...data,
       admissionYear,
@@ -215,6 +256,8 @@ export default function ChecklistForm({ program, major, admissionYear, onSubmit,
         <YesNoField fieldKey="researchEthicsCourse" label="연구윤리와 논문작성법 이수"
           detail="과목 이수 또는 면제 (0학점 P/F)"
           value={data.researchEthicsCourse} onChange={set} />
+
+        {formError && <p className="text-red-500 text-sm">{formError}</p>}
 
         <div className="flex gap-3 pt-2">
           <button type="button" onClick={onBack}

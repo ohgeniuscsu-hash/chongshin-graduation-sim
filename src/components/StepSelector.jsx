@@ -21,7 +21,7 @@ export default function StepSelector({ rules, initialSelection, onComplete }) {
       return
     }
     setError('')
-    onComplete({ ...sel, admissionYear: String(year) })
+    onComplete({ ...sel, admissionYear: year })
   }
 
   return (
@@ -82,7 +82,7 @@ export default function StepSelector({ rules, initialSelection, onComplete }) {
             className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
             placeholder="예: 2022"
             min="2000"
-            max="2030"
+            max={new Date().getFullYear() + 1}
             value={sel.admissionYear}
             onChange={e => setSel({ ...sel, admissionYear: e.target.value })}
           />

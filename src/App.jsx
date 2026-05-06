@@ -46,7 +46,7 @@ export default function App() {
             <ChecklistForm
               program={program}
               major={major}
-              admissionYear={parseInt(selection.admissionYear)}
+              admissionYear={selection.admissionYear}
               onSubmit={handleFormSubmit}
               onBack={() => setStep(1)}
             />
