@@ -1,4 +1,4 @@
-export default function ResultView({ result, onReset }) {
+export default function ResultView({ result, onEditConditions, onReset }) {
   const { passed, items } = result
   const failedItems = items.filter(i => i.met === false)
 
@@ -50,9 +50,14 @@ export default function ResultView({ result, onReset }) {
         예외 사항이 있거나 궁금한 점은 담당자에게 문의하세요.
       </div>
 
-      <button onClick={onReset}
-        className="w-full border border-gray-300 text-gray-600 font-medium py-2.5 rounded-lg hover:bg-gray-50 transition-colors"
-      >처음부터 다시하기</button>
+      <div className="flex gap-3">
+        <button onClick={onEditConditions}
+          className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-colors"
+        >← 조건 수정하기</button>
+        <button onClick={onReset}
+          className="flex-1 border border-gray-300 text-gray-600 font-medium py-2.5 rounded-lg hover:bg-gray-50 transition-colors"
+        >처음부터 다시하기</button>
+      </div>
     </div>
   )
 }

@@ -22,13 +22,13 @@ function YesNoField({ fieldKey, label, detail, value, onChange }) {
   )
 }
 
-export default function ChecklistForm({ program, major, admissionYear, onSubmit, onBack }) {
+export default function ChecklistForm({ program, major, admissionYear, initialFormData, onSubmit, onBack }) {
   const requiredCredits = getRequiredCredits(major, admissionYear)
   const qualExams = getQualExams(program, major)
   const isDoctor = program.id === 'doctor'
   const thesisOptions = program.thesisOptions || ['논문']
 
-  const [data, setData] = useState({
+  const defaultData = {
     registeredSemesters: '',
     earnedCredits: '',
     gpa: '',
@@ -46,7 +46,9 @@ export default function ChecklistForm({ program, major, admissionYear, onSubmit,
     academicConference: '',
     researchEthicsEducation: null,
     researchEthicsCourse: null,
-  })
+  }
+
+  const [data, setData] = useState(initialFormData ? { ...defaultData, ...initialFormData } : defaultData)
 
   const isThesis = data.thesisOption === '논문'
 

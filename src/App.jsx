@@ -10,6 +10,7 @@ export default function App() {
   const [step, setStep] = useState(1)
   const [selection, setSelection] = useState({ schoolId: '', programId: '', majorId: '', admissionYear: '' })
   const [result, setResult] = useState(null)
+  const [savedFormData, setSavedFormData] = useState(null)
 
   const school   = rules.schools.find(s => s.id === selection.schoolId)
   const program  = school?.programs.find(p => p.id === selection.programId)
@@ -17,19 +18,26 @@ export default function App() {
 
   function handleSelectionComplete(sel) {
     setSelection(sel)
+    setSavedFormData(null)
     setStep(2)
   }
 
   function handleFormSubmit(formData) {
+    setSavedFormData(formData)
     const evalResult = evaluate(formData, program, major)
     setResult(evalResult)
     setStep(3)
+  }
+
+  function handleEditConditions() {
+    setStep(2)
   }
 
   function handleReset() {
     setStep(1)
     setSelection({ schoolId: '', programId: '', majorId: '', admissionYear: '' })
     setResult(null)
+    setSavedFormData(null)
   }
 
   return (
@@ -47,12 +55,13 @@ export default function App() {
               program={program}
               major={major}
               admissionYear={selection.admissionYear}
+              initialFormData={savedFormData}
               onSubmit={handleFormSubmit}
               onBack={() => setStep(1)}
             />
           )}
           {step === 3 && result && (
-            <ResultView result={result} onReset={handleReset} />
+            <ResultView result={result} onEditConditions={handleEditConditions} onReset={handleReset} />
           )}
         </div>
       </div>
