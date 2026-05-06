@@ -1,0 +1,338 @@
+{
+  "schools": [
+    {
+      "id": "general",
+      "name": "일반대학원",
+      "programs": [
+        {
+          "id": "master",
+          "name": "석사",
+          "minSemesters": 4,
+          "maxSemesters": 12,
+          "thesisOptions": ["논문"],
+          "thesisAdvisoryMin": 5,
+          "baseQualExams": ["영어", "전공"],
+          "qualExamCounts": { "전공": 1 },
+          "majors": [
+            {
+              "id": "theology_thm",
+              "name": "신학과(Th.M.)",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 24 }
+              ]
+            },
+            {
+              "id": "christian_edu_ma",
+              "name": "기독교교육학(M.A.)",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 34 }
+              ]
+            },
+            {
+              "id": "early_childhood_ma",
+              "name": "유아교육학(M.A.)",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 30 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "doctor",
+          "name": "박사",
+          "minSemesters": 6,
+          "maxSemesters": 20,
+          "thesisOptions": ["논문"],
+          "thesisAdvisoryMin": 10,
+          "baseQualExams": ["영어", "전공"],
+          "qualExamCounts": { "전공": 1 },
+          "requiresPublication": true,
+          "requiresProposal": true,
+          "majors": [
+            {
+              "id": "theology_phd",
+              "name": "신학과(Ph.D.)",
+              "isTheologyDoctoral": true,
+              "extraQualExams": ["전공언어", "제2외국어"],
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 36 }
+              ]
+            },
+            {
+              "id": "christian_edu_phd",
+              "name": "기독교교육학(Ph.D.)",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 36 }
+              ]
+            },
+            {
+              "id": "biblical_counseling_phd",
+              "name": "성경적상담학(Ph.D.)",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 39 }
+              ]
+            },
+            {
+              "id": "unification_phd",
+              "name": "기독교통일개발학(Ph.D.)",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 39 }
+              ]
+            },
+            {
+              "id": "early_childhood_phd",
+              "name": "유아교육학(Ph.D.)",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 39 }
+              ]
+            },
+            {
+              "id": "social_welfare_phd",
+              "name": "사회복지학(Ph.D.)",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 39 }
+              ]
+            },
+            {
+              "id": "music_dma",
+              "name": "음악학(D.M.A.)",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 40 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ministry",
+      "name": "목회신학전문대학원",
+      "programs": [
+        {
+          "id": "master",
+          "name": "석사",
+          "minSemesters": 4,
+          "maxSemesters": 12,
+          "thesisOptions": ["논문", "논문대체"],
+          "thesisAdvisoryMin": 5,
+          "baseQualExams": ["영어", "전공"],
+          "qualExamCounts": { "전공": 1 },
+          "majors": [
+            {
+              "id": "ministry_master",
+              "name": "목회신학(M.Div.계열)",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 24 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "doctor",
+          "name": "박사",
+          "minSemesters": 6,
+          "maxSemesters": 20,
+          "thesisOptions": ["논문"],
+          "thesisAdvisoryMin": 10,
+          "baseQualExams": ["영어", "전공"],
+          "qualExamCounts": { "전공": 1 },
+          "requiresPublication": true,
+          "requiresProposal": true,
+          "majors": [
+            {
+              "id": "ministry_doctor",
+              "name": "목회신학(D.Min.계열)",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 36 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mission",
+      "name": "선교대학원",
+      "programs": [
+        {
+          "id": "master",
+          "name": "석사",
+          "minSemesters": 4,
+          "maxSemesters": 12,
+          "thesisOptions": ["논문", "논문대체"],
+          "thesisAdvisoryMin": 5,
+          "baseQualExams": ["영어", "전공"],
+          "qualExamCounts": { "전공": 2 },
+          "majors": [
+            {
+              "id": "mission_thm",
+              "name": "선교학(Th.M.)",
+              "creditRules": [
+                { "admissionYearFrom": 2025, "admissionYearTo": 9999, "totalCredits": 27 },
+                { "admissionYearFrom": 2020, "admissionYearTo": 2024, "totalCredits": 27 },
+                { "admissionYearFrom": 2016, "admissionYearTo": 2019, "totalCredits": 27 },
+                { "admissionYearFrom": 2013, "admissionYearTo": 2015, "totalCredits": 28 }
+              ]
+            },
+            {
+              "id": "mission_ma",
+              "name": "선교학(M.A.)",
+              "creditRules": [
+                { "admissionYearFrom": 2025, "admissionYearTo": 9999, "totalCredits": 36 },
+                { "admissionYearFrom": 2020, "admissionYearTo": 2024, "totalCredits": 36 },
+                { "admissionYearFrom": 2016, "admissionYearTo": 2019, "totalCredits": 36 },
+                { "admissionYearFrom": 2013, "admissionYearTo": 2015, "totalCredits": 36 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "education",
+      "name": "교육대학원",
+      "programs": [
+        {
+          "id": "master",
+          "name": "석사",
+          "minSemesters": 5,
+          "maxSemesters": 12,
+          "thesisOptions": ["논문", "논문대체"],
+          "thesisAdvisoryMin": 5,
+          "baseQualExams": ["영어", "전공", "교직"],
+          "qualExamCounts": { "전공": 2, "교직": 1 },
+          "majors": [
+            {
+              "id": "edu_early_childhood",
+              "name": "유아교육전공",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 30 }
+              ]
+            },
+            {
+              "id": "edu_christian",
+              "name": "기독교교육전공",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 30 }
+              ]
+            },
+            {
+              "id": "edu_english",
+              "name": "영어교육전공",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 30 }
+              ]
+            },
+            {
+              "id": "edu_history",
+              "name": "역사교육전공",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 30 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "social_welfare",
+      "name": "사회복지대학원",
+      "programs": [
+        {
+          "id": "master",
+          "name": "석사",
+          "minSemesters": 5,
+          "maxSemesters": 12,
+          "thesisOptions": ["논문", "논문대체"],
+          "thesisAdvisoryMin": 5,
+          "baseQualExams": ["영어", "전공"],
+          "qualExamCounts": { "전공": 3 },
+          "majors": [
+            {
+              "id": "social_welfare_master",
+              "name": "사회복지학",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 36 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "counseling",
+      "name": "상담대학원",
+      "programs": [
+        {
+          "id": "master",
+          "name": "석사",
+          "minSemesters": 5,
+          "maxSemesters": 12,
+          "thesisOptions": ["논문", "논문대체"],
+          "thesisAdvisoryMin": 5,
+          "baseQualExams": ["영어", "전공"],
+          "qualExamCounts": { "전공": 2 },
+          "majors": [
+            {
+              "id": "counseling_master",
+              "name": "성경적상담학",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 36 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "church_music",
+      "name": "교회음악대학원",
+      "programs": [
+        {
+          "id": "master",
+          "name": "석사",
+          "minSemesters": 5,
+          "maxSemesters": 12,
+          "thesisOptions": ["논문", "논문대체", "졸업연주+소논문"],
+          "thesisAdvisoryMin": 5,
+          "baseQualExams": ["영어", "전공"],
+          "qualExamCounts": { "전공": 2 },
+          "majors": [
+            {
+              "id": "church_music_master",
+              "name": "교회음악학",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 36 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unification",
+      "name": "통일개발대학원",
+      "programs": [
+        {
+          "id": "master",
+          "name": "석사",
+          "minSemesters": 5,
+          "maxSemesters": 12,
+          "thesisOptions": ["논문", "논문대체"],
+          "thesisAdvisoryMin": 5,
+          "baseQualExams": ["영어", "전공"],
+          "qualExamCounts": { "전공": 2 },
+          "majors": [
+            {
+              "id": "unification_master",
+              "name": "기독교통일개발학",
+              "creditRules": [
+                { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 36 }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
