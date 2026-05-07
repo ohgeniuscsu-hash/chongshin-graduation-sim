@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getRequiredCredits, getQualExams } from '../logic/evaluate'
+import { getRequiredCredits, getQualExams, getRequiredCourses } from '../logic/evaluate'
 
 function YesNoField({ fieldKey, label, detail, value, onChange }) {
   return (
@@ -26,7 +26,7 @@ export default function ChecklistForm({ program, major, admissionYear, initialFo
   const qualExams = getQualExams(program, major)
   const isDoctor = program.id === 'doctor'
   const thesisOptions = program.thesisOptions || ['논문']
-  const requiredCourses = program.requiredCourses || []
+  const requiredCourses = getRequiredCourses(program, major, admissionYear)
 
   const defaultData = {
     registeredSemesters: '',

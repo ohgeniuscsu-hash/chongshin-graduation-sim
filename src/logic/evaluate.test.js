@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { getRequiredCredits, getQualExams, evaluate } from './evaluate'
+import { getRequiredCredits, getQualExams, getRequiredCourses, evaluate } from './evaluate'
 
 // ── 테스트용 픽스처 ──────────────────────────────────────
 const theologyMajor = {
@@ -215,5 +215,97 @@ describe('evaluate: 필수과목', () => {
     const result = evaluate(input, practiceProgram, theologyMajor)
     expect(result.passed).toBe(false)
     expect(result.items.find(i => i.id === 'requiredCourse_practicum_1').met).toBe(false)
+  })
+})
+
+// ── getRequiredCourses — major-level requiredCourses ──────
+describe('getRequiredCourses: major-level 필수과목', () => {
+  const programWithCourse = { ...masterProgram, requiredCourses: [{ id: 'prog_course', label: '프로그램 필수' }] }
+  const majorWithCourse = { ...theologyMajor, requiredCourses: [{ id: 'major_course', label: '학과 필수' }] }
+
+  it('program + major requiredCourses 합산', () => {
+    const result = getRequiredCourses(programWithCourse, majorWithCourse, 2022)
+    expect(result.map(c => c.id)).toEqual(['prog_course', 'major_course'])
+  })
+
+  it('program requiredCourses 없을 때 major만 반환', () => {
+    const result = getRequiredCourses(masterProgram, majorWithCourse, 2022)
+    expect(result.map(c => c.id)).toEqual(['major_course'])
+  })
+
+  it('major requiredCourses 없을 때 program만 반환', () => {
+    const result = getRequiredCourses(programWithCourse, theologyMajor, 2022)
+    expect(result.map(c => c.id)).toEqual(['prog_course'])
+  })
+})
+
+// ── getRequiredCourses — sinceAdmissionYear ───────────────
+describe('getRequiredCourses: sinceAdmissionYear 조건', () => {
+  const programWithConditional = {
+    ...masterProgram,
+    requiredCourses: [
+      { id: 'always_required', label: '항상 필수' },
+      { id: 'since_2025', label: '2025학번부터 필수', sinceAdmissionYear: 2025 },
+    ],
+  }
+
+  it('2025학번 → since_2025 포함', () => {
+    const courses = getRequiredCourses(programWithConditional, theologyMajor, 2025)
+    expect(courses.map(c => c.id)).toContain('since_2025')
+  })
+
+  it('2026학번 → since_2025 포함', () => {
+    const courses = getRequiredCourses(programWithConditional, theologyMajor, 2026)
+    expect(courses.map(c => c.id)).toContain('since_2025')
+  })
+
+  it('2024학번 → since_2025 미포함', () => {
+    const courses = getRequiredCourses(programWithConditional, theologyMajor, 2024)
+    expect(courses.map(c => c.id)).not.toContain('since_2025')
+    expect(courses.map(c => c.id)).toContain('always_required')
+  })
+})
+
+// ── evaluate — major-level requiredCourses ────────────────
+describe('evaluate: major-level 필수과목', () => {
+  const majorWithCourse = {
+    ...theologyMajor,
+    requiredCourses: [{ id: 'foundation_theology', label: '기초신학과목 이수' }],
+  }
+
+  it('major 필수과목 이수 → passed=true', () => {
+    const input = { ...passingMasterInput, requiredCourse_foundation_theology: true }
+    const result = evaluate(input, masterProgram, majorWithCourse)
+    expect(result.passed).toBe(true)
+  })
+
+  it('major 필수과목 미이수 → passed=false', () => {
+    const input = { ...passingMasterInput, requiredCourse_foundation_theology: false }
+    const result = evaluate(input, masterProgram, majorWithCourse)
+    expect(result.passed).toBe(false)
+    expect(result.items.find(i => i.id === 'requiredCourse_foundation_theology').met).toBe(false)
+  })
+})
+
+// ── evaluate — sinceAdmissionYear 조건부 필수 ────────────
+describe('evaluate: sinceAdmissionYear 조건부 필수과목', () => {
+  const conditionalProgram = {
+    ...masterProgram,
+    requiredCourses: [
+      { id: 'since_2025', label: '2025학번부터 필수', sinceAdmissionYear: 2025 },
+    ],
+  }
+
+  it('2025학번 미이수 → passed=false', () => {
+    const input = { ...passingMasterInput, admissionYear: 2025, requiredCourse_since_2025: false }
+    const result = evaluate(input, conditionalProgram, theologyMajor)
+    expect(result.passed).toBe(false)
+  })
+
+  it('2024학번은 해당 없음 → passed=true (미입력이어도)', () => {
+    const input = { ...passingMasterInput, admissionYear: 2024 }
+    const result = evaluate(input, conditionalProgram, theologyMajor)
+    expect(result.passed).toBe(true)
+    expect(result.items.find(i => i.id === 'requiredCourse_since_2025')).toBeUndefined()
   })
 })

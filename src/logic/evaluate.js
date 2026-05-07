@@ -15,6 +15,13 @@ export function getQualExams(program, major) {
   return exams
 }
 
+export function getRequiredCourses(program, major, admissionYear) {
+  return [
+    ...(program.requiredCourses || []),
+    ...(major.requiredCourses || []),
+  ].filter(c => !c.sinceAdmissionYear || admissionYear >= c.sinceAdmissionYear)
+}
+
 export function evaluate(input, program, major) {
   const requiredCredits = getRequiredCredits(major, input.admissionYear, input.thesisOption)
   const qualExams = getQualExams(program, major)
@@ -167,7 +174,7 @@ export function evaluate(input, program, major) {
     detail: '과목 이수 또는 면제',
   })
 
-  for (const course of program.requiredCourses || []) {
+  for (const course of getRequiredCourses(program, major, input.admissionYear)) {
     items.push({
       id: `requiredCourse_${course.id}`,
       label: course.label,

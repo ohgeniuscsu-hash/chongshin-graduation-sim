@@ -98,6 +98,13 @@
               "name": "음악학(D.M.A.)",
               "creditRules": [
                 { "admissionYearFrom": 2020, "admissionYearTo": 9999, "totalCredits": 40 }
+              ],
+              "requiredCourses": [
+                {
+                  "id": "foundation_theology",
+                  "label": "기초신학과목 3과목 이수",
+                  "detail": "구약개론·신약개론·조직신학개론·역사신학개론·실천신학개론·선교신학개론 중 3과목(6학점) 이수 또는 학점인정"
+                }
               ]
             }
           ]
@@ -283,12 +290,23 @@
             {
               "id": "counseling_practicum_1",
               "label": "상담실습 I 이수",
-              "detail": "졸업 필수과목"
+              "detail": "졸업 필수과목 (임상실습 30시간, 수퍼비전 20시간 포함)"
             },
             {
               "id": "counseling_practicum_2",
               "label": "상담실습 II 이수",
-              "detail": "졸업 필수과목"
+              "detail": "졸업 필수과목 (임상실습 30시간, 수퍼비전 20시간 포함)"
+            },
+            {
+              "id": "theology_prereq",
+              "label": "신학선수과목 이수 또는 면제",
+              "detail": "성경신학·교의신학·역사신학·기독교세계관·실천신학 중 1과목(2학점 이상) — 신학계열 출신자·기이수자 면제 신청 가능 (총신대·고신·합신·총신신대원 인정)"
+            },
+            {
+              "id": "self_exploration",
+              "label": "자기 탐색 및 경건훈련 이수",
+              "detail": "공통필수 (0학점, P/F) — 2025학번부터 적용",
+              "sinceAdmissionYear": 2025
             }
           ],
           "majors": [
@@ -316,6 +334,13 @@
           "thesisAdvisoryMin": 5,
           "baseQualExams": ["영어", "전공"],
           "qualExamCounts": { "전공": 2 },
+          "requiredCourses": [
+            {
+              "id": "theology_course",
+              "label": "전필 신학과목 이수",
+              "detail": "구약개론·신약개론·기독교세계관 중 1과목 이상 이수 (이전 수강 시 학점인정 신청으로 면제 가능)"
+            }
+          ],
           "majors": [
             {
               "id": "church_music_master",
